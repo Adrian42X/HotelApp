@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HotelDBModelStoreContainer" CdmEntityContainer="HotelDBEntities">
+    <EntitySetMapping Name="CAMERAs">
+      <EntityTypeMapping TypeName="HotelDBModel.CAMERA">
+        <MappingFragment StoreEntitySet="CAMERA">
+          <ScalarProperty Name="id_camera" ColumnName="id_camera" />
+          <ScalarProperty Name="id_tip" ColumnName="id_tip" />
+          <ScalarProperty Name="id_status" ColumnName="id_status" />
+          <ScalarProperty Name="nr_camera" ColumnName="nr_camera" />
+          <ScalarProperty Name="etaj" ColumnName="etaj" />
+          <ScalarProperty Name="valabilitate" ColumnName="valabilitate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DOTAREs">
+      <EntityTypeMapping TypeName="HotelDBModel.DOTARE">
+        <MappingFragment StoreEntitySet="DOTARE">
+          <ScalarProperty Name="id_dotare" ColumnName="id_dotare" />
+          <ScalarProperty Name="detalii_dotare" ColumnName="detalii_dotare" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IMAGINEs">
+      <EntityTypeMapping TypeName="HotelDBModel.IMAGINE">
+        <MappingFragment StoreEntitySet="IMAGINE">
+          <ScalarProperty Name="id_imagine" ColumnName="id_imagine" />
+          <ScalarProperty Name="imagine1" ColumnName="imagine" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OFERTAs">
+      <EntityTypeMapping TypeName="HotelDBModel.OFERTA">
+        <MappingFragment StoreEntitySet="OFERTA">
+          <ScalarProperty Name="id_oferta" ColumnName="id_oferta" />
+          <ScalarProperty Name="id_camera" ColumnName="id_camera" />
+          <ScalarProperty Name="descriere" ColumnName="descriere" />
+          <ScalarProperty Name="check_in" ColumnName="check_in" />
+          <ScalarProperty Name="check_out" ColumnName="check_out" />
+          <ScalarProperty Name="pret_oferta" ColumnName="pret_oferta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="REZERVAREs">
+      <EntityTypeMapping TypeName="HotelDBModel.REZERVARE">
+        <MappingFragment StoreEntitySet="REZERVARE">
+          <ScalarProperty Name="id_rezervare" ColumnName="id_rezervare" />
+          <ScalarProperty Name="id_camera" ColumnName="id_camera" />
+          <ScalarProperty Name="check_in" ColumnName="check_in" />
+          <ScalarProperty Name="check_out" ColumnName="check_out" />
+          <ScalarProperty Name="nr_clienti" ColumnName="nr_clienti" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SERVICIUs">
+      <EntityTypeMapping TypeName="HotelDBModel.SERVICIU">
+        <MappingFragment StoreEntitySet="SERVICIU">
+          <ScalarProperty Name="id_serviciu" ColumnName="id_serviciu" />
+          <ScalarProperty Name="detalii_serviciu" ColumnName="detalii_serviciu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="STATUS">
+      <EntityTypeMapping TypeName="HotelDBModel.STATUS">
+        <MappingFragment StoreEntitySet="STATUS">
+          <ScalarProperty Name="id_status" ColumnName="id_status" />
+          <ScalarProperty Name="nume_status" ColumnName="nume_status" />
+          <ScalarProperty Name="detalii" ColumnName="detalii" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TIPCAMERAs">
+      <EntityTypeMapping TypeName="HotelDBModel.TIPCAMERA">
+        <MappingFragment StoreEntitySet="TIPCAMERA">
+          <ScalarProperty Name="id_tip" ColumnName="id_tip" />
+          <ScalarProperty Name="id_imagine" ColumnName="id_imagine" />
+          <ScalarProperty Name="id_dotare" ColumnName="id_dotare" />
+          <ScalarProperty Name="id_serviciu" ColumnName="id_serviciu" />
+          <ScalarProperty Name="capacitate" ColumnName="capacitate" />
+          <ScalarProperty Name="nume" ColumnName="nume" />
+          <ScalarProperty Name="pret" ColumnName="pret" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="AddOffer" FunctionName="HotelDBModel.Store.AddOffer" />
+    <FunctionImportMapping FunctionImportName="AddRoom" FunctionName="HotelDBModel.Store.AddRoom" />
+    <FunctionImportMapping FunctionImportName="DeleteRoom" FunctionName="HotelDBModel.Store.DeleteRoom" />
+    <FunctionImportMapping FunctionImportName="GetAvailableRooms" FunctionName="HotelDBModel.Store.GetAvailableRooms">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="HotelDBModel.GetAvailableRooms_Result">
+          <ScalarProperty Name="nume" ColumnName="nume" />
+          <ScalarProperty Name="nr_camera" ColumnName="nr_camera" />
+          <ScalarProperty Name="pret" ColumnName="pret" />
+          <ScalarProperty Name="imagine" ColumnName="imagine" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetFeatures" FunctionName="HotelDBModel.Store.GetFeatures" />
+    <FunctionImportMapping FunctionImportName="GetOffers" FunctionName="HotelDBModel.Store.GetOffers">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="HotelDBModel.GetOffers_Result">
+          <ScalarProperty Name="nr_camera" ColumnName="nr_camera" />
+          <ScalarProperty Name="descriere" ColumnName="descriere" />
+          <ScalarProperty Name="check_in" ColumnName="check_in" />
+          <ScalarProperty Name="check_out" ColumnName="check_out" />
+          <ScalarProperty Name="pret_oferta" ColumnName="pret_oferta" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetRooms" FunctionName="HotelDBModel.Store.GetRooms">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="HotelDBModel.GetRooms_Result">
+          <ScalarProperty Name="nr_camera" ColumnName="nr_camera" />
+          <ScalarProperty Name="etaj" ColumnName="etaj" />
+          <ScalarProperty Name="valabilitate" ColumnName="valabilitate" />
+          <ScalarProperty Name="capacitate" ColumnName="capacitate" />
+          <ScalarProperty Name="pret" ColumnName="pret" />
+          <ScalarProperty Name="nume" ColumnName="nume" />
+          <ScalarProperty Name="detalii_dotare" ColumnName="detalii_dotare" />
+          <ScalarProperty Name="detalii_serviciu" ColumnName="detalii_serviciu" />
+          <ScalarProperty Name="nume_status" ColumnName="nume_status" />
+          <ScalarProperty Name="imagine" ColumnName="imagine" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetRoomTypes" FunctionName="HotelDBModel.Store.GetRoomTypes">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="HotelDBModel.GetRoomTypes_Result">
+          <ScalarProperty Name="nume" ColumnName="nume" />
+          <ScalarProperty Name="pret" ColumnName="pret" />
+          <ScalarProperty Name="capacitate" ColumnName="capacitate" />
+          <ScalarProperty Name="detalii_dotare" ColumnName="detalii_dotare" />
+          <ScalarProperty Name="detalii_serviciu" ColumnName="detalii_serviciu" />
+          <ScalarProperty Name="imagine" ColumnName="imagine" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UpdateRoomFeature" FunctionName="HotelDBModel.Store.UpdateRoomFeature" />
+    <FunctionImportMapping FunctionImportName="UpdateRoomPrice" FunctionName="HotelDBModel.Store.UpdateRoomPrice" />
+    <FunctionImportMapping FunctionImportName="UpdateRoomService" FunctionName="HotelDBModel.Store.UpdateRoomService" />
+  </EntityContainerMapping>
+</Mapping>

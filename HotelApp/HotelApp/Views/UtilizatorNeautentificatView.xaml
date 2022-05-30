@@ -1,0 +1,43 @@
+﻿<Window x:Class="HotelApp.Views.UtilizatorNeautentificatView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HotelApp.ViewModels"
+        mc:Ignorable="d"
+        Title="UtilizatorNeautentificatView" Height="450" Width="800">
+    <Window.DataContext>
+        <local:UtilizatorNeautentificatVM/>
+    </Window.DataContext>
+    <Grid>
+        <Label Content="Guest" HorizontalAlignment="Left" Margin="325,24,0,0" VerticalAlignment="Top" Width="236"/>
+        <DatePicker HorizontalAlignment="Left" Margin="244,65,0,0" 
+                    SelectedDate="{Binding DateIn, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top"/>
+        <DatePicker HorizontalAlignment="Left" Margin="244,96,0,0" 
+                    SelectedDate="{Binding DateOut, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top"/>
+        <Label Content="Choose a date :" HorizontalAlignment="Left" Margin="69,77,0,0" VerticalAlignment="Top"/>
+        <Label Content="Check in" HorizontalAlignment="Left" Margin="166,63,0,0" VerticalAlignment="Top"/>
+        <Label Content="Check out" HorizontalAlignment="Left" Margin="166,94,0,0" VerticalAlignment="Top"/>
+        <ListView Name="roomlist" Margin="23,143,25,25" ItemsSource="{Binding Rooms}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Nume camera" Width="190" DisplayMemberBinding="{Binding nume}" />
+                    <GridViewColumn Header="Pret" Width="100" DisplayMemberBinding="{Binding pret}" />
+                    <GridViewColumn Header="Capacitate" Width="70" DisplayMemberBinding="{Binding capacitate}" />
+                    <GridViewColumn Header="Dotari" Width="190" DisplayMemberBinding="{Binding detalii_dotare}" />
+                    <GridViewColumn Header="Servicii" Width="190" DisplayMemberBinding="{Binding detalii_serviciu}" />
+                    <GridViewColumn Header="Imagine" Width="250">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding imagine}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="Cautare" HorizontalAlignment="Left" Margin="456,83,0,0" 
+                Command="{Binding OpenSearchCommand}"  VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

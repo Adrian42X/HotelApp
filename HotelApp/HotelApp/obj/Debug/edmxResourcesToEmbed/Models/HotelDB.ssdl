@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HotelDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CAMERA">
+    <Key>
+      <PropertyRef Name="id_camera" />
+    </Key>
+    <Property Name="id_camera" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_tip" Type="int" />
+    <Property Name="id_status" Type="int" />
+    <Property Name="nr_camera" Type="int" />
+    <Property Name="etaj" Type="int" />
+    <Property Name="valabilitate" Type="bit" />
+  </EntityType>
+  <EntityType Name="DOTARE">
+    <Key>
+      <PropertyRef Name="id_dotare" />
+    </Key>
+    <Property Name="id_dotare" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="detalii_dotare" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="IMAGINE">
+    <Key>
+      <PropertyRef Name="id_imagine" />
+    </Key>
+    <Property Name="id_imagine" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="imagine" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="OFERTA">
+    <Key>
+      <PropertyRef Name="id_oferta" />
+    </Key>
+    <Property Name="id_oferta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_camera" Type="int" />
+    <Property Name="descriere" Type="varchar" MaxLength="100" />
+    <Property Name="check_in" Type="date" />
+    <Property Name="check_out" Type="date" />
+    <Property Name="pret_oferta" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="REZERVARE">
+    <Key>
+      <PropertyRef Name="id_rezervare" />
+    </Key>
+    <Property Name="id_rezervare" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_camera" Type="int" />
+    <Property Name="check_in" Type="date" />
+    <Property Name="check_out" Type="date" />
+    <Property Name="nr_clienti" Type="int" />
+  </EntityType>
+  <EntityType Name="SERVICIU">
+    <Key>
+      <PropertyRef Name="id_serviciu" />
+    </Key>
+    <Property Name="id_serviciu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="detalii_serviciu" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="STATUS">
+    <Key>
+      <PropertyRef Name="id_status" />
+    </Key>
+    <Property Name="id_status" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nume_status" Type="varchar" MaxLength="50" />
+    <Property Name="detalii" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="TIPCAMERA">
+    <Key>
+      <PropertyRef Name="id_tip" />
+    </Key>
+    <Property Name="id_tip" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_imagine" Type="int" />
+    <Property Name="id_dotare" Type="int" />
+    <Property Name="id_serviciu" Type="int" />
+    <Property Name="capacitate" Type="int" />
+    <Property Name="nume" Type="varchar" MaxLength="50" />
+    <Property Name="pret" Type="int" />
+  </EntityType>
+  <Association Name="FK_CAMERA_STATUS">
+    <End Role="STATUS" Type="Self.STATUS" Multiplicity="0..1" />
+    <End Role="CAMERA" Type="Self.CAMERA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="STATUS">
+        <PropertyRef Name="id_status" />
+      </Principal>
+      <Dependent Role="CAMERA">
+        <PropertyRef Name="id_status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CAMERA_TIPCAMERA">
+    <End Role="TIPCAMERA" Type="Self.TIPCAMERA" Multiplicity="0..1" />
+    <End Role="CAMERA" Type="Self.CAMERA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TIPCAMERA">
+        <PropertyRef Name="id_tip" />
+      </Principal>
+      <Dependent Role="CAMERA">
+        <PropertyRef Name="id_tip" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OFERTA_CAMERA">
+    <End Role="CAMERA" Type="Self.CAMERA" Multiplicity="0..1" />
+    <End Role="OFERTA" Type="Self.OFERTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CAMERA">
+        <PropertyRef Name="id_camera" />
+      </Principal>
+      <Dependent Role="OFERTA">
+        <PropertyRef Name="id_camera" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_REZERVARE_CAMERA">
+    <End Role="CAMERA" Type="Self.CAMERA" Multiplicity="0..1" />
+    <End Role="REZERVARE" Type="Self.REZERVARE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CAMERA">
+        <PropertyRef Name="id_camera" />
+      </Principal>
+      <Dependent Role="REZERVARE">
+        <PropertyRef Name="id_camera" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TIPCAMERA_Dotare">
+    <End Role="DOTARE" Type="Self.DOTARE" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TIPCAMERA" Type="Self.TIPCAMERA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DOTARE">
+        <PropertyRef Name="id_dotare" />
+      </Principal>
+      <Dependent Role="TIPCAMERA">
+        <PropertyRef Name="id_dotare" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TIPCAMERA_IMAGINE">
+    <End Role="IMAGINE" Type="Self.IMAGINE" Multiplicity="0..1" />
+    <End Role="TIPCAMERA" Type="Self.TIPCAMERA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IMAGINE">
+        <PropertyRef Name="id_imagine" />
+      </Principal>
+      <Dependent Role="TIPCAMERA">
+        <PropertyRef Name="id_imagine" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TIPCAMERA_SERVICIU">
+    <End Role="SERVICIU" Type="Self.SERVICIU" Multiplicity="0..1" />
+    <End Role="TIPCAMERA" Type="Self.TIPCAMERA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SERVICIU">
+        <PropertyRef Name="id_serviciu" />
+      </Principal>
+      <Dependent Role="TIPCAMERA">
+        <PropertyRef Name="id_serviciu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="AddOffer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="descriere" Type="varchar" Mode="In" />
+    <Parameter Name="pret" Type="int" Mode="In" />
+    <Parameter Name="checkin" Type="date" Mode="In" />
+    <Parameter Name="checkout" Type="date" Mode="In" />
+  </Function>
+  <Function Name="AddRoom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="roomNr" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DeleteRoom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="roomNr" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetAvailableRooms" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="datein" Type="date" Mode="In" />
+    <Parameter Name="dateout" Type="date" Mode="In" />
+  </Function>
+  <Function Name="GetFeatures" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetOffers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetRooms" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetRoomTypes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="UpdateRoomFeature" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="roomNr" Type="int" Mode="In" />
+    <Parameter Name="feature" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="UpdateRoomPrice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="roomNr" Type="int" Mode="In" />
+    <Parameter Name="price" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UpdateRoomService" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="roomNr" Type="int" Mode="In" />
+    <Parameter Name="service" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="HotelDBModelStoreContainer">
+    <EntitySet Name="CAMERA" EntityType="Self.CAMERA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DOTARE" EntityType="Self.DOTARE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IMAGINE" EntityType="Self.IMAGINE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OFERTA" EntityType="Self.OFERTA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="REZERVARE" EntityType="Self.REZERVARE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SERVICIU" EntityType="Self.SERVICIU" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="STATUS" EntityType="Self.STATUS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TIPCAMERA" EntityType="Self.TIPCAMERA" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CAMERA_STATUS" Association="Self.FK_CAMERA_STATUS">
+      <End Role="STATUS" EntitySet="STATUS" />
+      <End Role="CAMERA" EntitySet="CAMERA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CAMERA_TIPCAMERA" Association="Self.FK_CAMERA_TIPCAMERA">
+      <End Role="TIPCAMERA" EntitySet="TIPCAMERA" />
+      <End Role="CAMERA" EntitySet="CAMERA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OFERTA_CAMERA" Association="Self.FK_OFERTA_CAMERA">
+      <End Role="CAMERA" EntitySet="CAMERA" />
+      <End Role="OFERTA" EntitySet="OFERTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_REZERVARE_CAMERA" Association="Self.FK_REZERVARE_CAMERA">
+      <End Role="CAMERA" EntitySet="CAMERA" />
+      <End Role="REZERVARE" EntitySet="REZERVARE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TIPCAMERA_Dotare" Association="Self.FK_TIPCAMERA_Dotare">
+      <End Role="DOTARE" EntitySet="DOTARE" />
+      <End Role="TIPCAMERA" EntitySet="TIPCAMERA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TIPCAMERA_IMAGINE" Association="Self.FK_TIPCAMERA_IMAGINE">
+      <End Role="IMAGINE" EntitySet="IMAGINE" />
+      <End Role="TIPCAMERA" EntitySet="TIPCAMERA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TIPCAMERA_SERVICIU" Association="Self.FK_TIPCAMERA_SERVICIU">
+      <End Role="SERVICIU" EntitySet="SERVICIU" />
+      <End Role="TIPCAMERA" EntitySet="TIPCAMERA" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
